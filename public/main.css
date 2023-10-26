@@ -6,10 +6,20 @@
 body{
   display: flex;
   justify-content: center;
+  align-items: center;
   background-color: darkslateblue;
 
 }
 main{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(44, 49, 80);
+  margin: 5%;
+  padding: 3%;
+}
+
+.content{
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -31,7 +41,15 @@ main{
   width: 60%;
   height: 20%;
 }
-#submit{
+.button{
   margin: 2%;
   border: .5em solid black;
 }
+#info{
+  width: 40vw;
+  height: 60vh;
+}
+#warning{
+  color: red;
+}
+

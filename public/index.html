@@ -10,9 +10,30 @@
 </head>
 <body>
   <main>
-    <textarea readonly id = "output">Nothing Yet</textarea>
-    <textarea type = "text" id = "input"></textarea>
-    <button id = "submit">Submit</button>
+    <div id="make-char" class = "content">
+      <label for="name">Name:</label>
+      <input type="text" id="name" />
+      
+      <label for="background">Background:</label>
+      <textarea id="background"></textarea>
+      
+      <label for="description">Description:</label>
+      <textarea id="description"></textarea>
+      
+      <label for="info">Info</label>
+      <label for ="info">Fill out a series of facts/ biographical information about your squire separated by commas</label>
+      <textarea id="info"></textarea>
+      
+      <button id="make" class = "button">Hire Your Squire</button>
+      <h2 id = "warning"></h2>
+    </div>
+    
+    <div id = "chat" class = "content">
+      <textarea readonly id = "output">Nothing Yet</textarea>
+      <textarea type = "text" id = "input"></textarea>
+      <button id = "submit" class = "button">Submit</button>
+    </div>
+    
   </main>
 </body>
 </html>

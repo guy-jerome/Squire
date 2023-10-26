@@ -1,10 +1,10 @@
 import {config} from "dotenv"
 config()
 import { fileURLToPath } from 'url';
-//import OpenAI from "openai"
 import {OpenAI} from "langchain/llms/openai"
 import express from "express"
 import path from "path"
+import ChatProcessor from "./chatbot.js"
 
 //This allows __dirname with using modules.
 const __filename = fileURLToPath(import.meta.url);
@@ -18,42 +18,27 @@ app.use(express.static(path.join(__dirname, "public")));
 //Used with json
 app.use(express.json());
 
-const llm = new OpenAI({
-  apiKey: process.env.API_KEY
-})
-
-// const openai = new OpenAI( {
-//   apiKey: process.env.API_KEY
-// })
-
-
+const chatProcessor = new ChatProcessor(process.env.OPENAI_API_KEY)
 
 app.get('/', (req, res) =>{
   const filePath = path.join(__dirname, 'public','index.html')
   res.sendFile(filePath)
 })
 
-app.post('/data', (req, res)=>{
-  let message = req.body.message
-  getResponse(message).then((response)=>{
-    res.send(response)
-  });
+app.post('/create', (req, res) =>{
+  let data = req.body
+  chatProcessor.init(data.name, data.background, data.description, data.info).then(()=>{
+    res.send("set up complete")})
 })
 
+app.post('/data', (req, res)=>{
+  let message = req.body.message
+  chatProcessor.getInput(message).then((message)=>{res.send(message)})
+})
 
 app.listen(port, () =>{
   console.log(`Server is running on port localhost:${port}`)
 })
 
-// let messages = [{"role": "system", "content": "You are a very cute cat by the name of chester who love cheese, you barely know anything about the world and answer most questions with really strange lies."}]
 
-//  async function getResponse(question){
-//   messages.push({"role": "user", "content": question})
-//   const response = await openai.chat.completions.create({
-//     model: "gpt-3.5-turbo",
-//     messages: messages
-//   });
-//   messages.push(response.choices[0].message)
-//   return messages
-// }
 
