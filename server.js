@@ -6,6 +6,15 @@ import express from "express"
 import path from "path"
 import ChatProcessor from "./chatbot.js"
 
+import mongoose from 'mongoose'
+import squireSchema from './squireSchema.js'
+
+const Squire = mongoose.model('Squire', squireSchema)
+
+mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
+
+const db = mongoose.connection
+
 //This allows __dirname with using modules.
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -27,6 +36,27 @@ app.get('/', (req, res) =>{
 
 app.post('/create', (req, res) =>{
   let data = req.body
+
+
+    // Create a new instance of the Character model with the data
+    const squire = new Squire({
+      name: data.name,
+      background: data.background,
+      description: data.description,
+      info: data.info
+    });
+
+    // Save the new instance to the database using promises
+    squire.save()
+    .then(()=>{
+      console.log("Saved to database")
+    })
+    .catch(err=>{
+      console.log("wont save to database", err)
+    })
+
+
+
   chatProcessor.init(data.name, data.background, data.description, data.info).then(()=>{
     res.send("set up complete")})
 })
