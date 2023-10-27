@@ -7,37 +7,38 @@ import ChatProcessor from "./chatbot.js"
 import mongoose from 'mongoose'
 import squireSchema from './squireSchema.js'
 
+//SET UP DATABASE CONNECTION
 const Squire = mongoose.model('Squire', squireSchema)
-
 mongoose.connect(process.env.DATABASE_URL, {useNewUrlParser: true})
-
 const db = mongoose.connection
 
-//This allows __dirname with using modules.
+//GET FILE NAME WORKING WITH ES6
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
-// Create express
+
+//INIT EXPRESS
 const app = express()
-//Set up the port
 const port = process.env.PORT || 3000;
-//Uses the folder static for public files
+
+//MIDDLE WARE
 app.use(express.static(path.join(__dirname, "public")));
-//Used with json
 app.use(express.json());
 
+//SET UP THE CHAT BOT PROCESSOR
 const chatProcessor = new ChatProcessor(process.env.OPENAI_API_KEY)
 
+
+//-------------------------ROUTES---------------------------------
+
+//Sends the main index file
 app.get('/', (req, res) =>{
   const filePath = path.join(__dirname, 'public','index','index.html')
   res.sendFile(filePath)
 })
 
-
-
+//LOADS ONE SQUIRE
 app.post('/load', (req, res) => {
   const squireName = req.body.squireName;
- // Assuming you pass the Squire's name in the request body
-  // Use Mongoose to find the Squire by its name
   Squire.findOne({ name: squireName })
     .then((squire) => {
       if (!squire) {
@@ -53,6 +54,7 @@ app.post('/load', (req, res) => {
     });
 });
 
+//LOADS ALL OF THE SQUIRES FROM THE DATABASE
 app.get('/get-all-squires', (req, res) => {
   // Use Mongoose to find all squires in the database
   Squire.find({})
@@ -65,7 +67,7 @@ app.get('/get-all-squires', (req, res) => {
     });
 });
 
-
+//CREATES A SQUIRE
 app.post('/create', (req, res) =>{
   let data = req.body
 
@@ -86,20 +88,18 @@ app.post('/create', (req, res) =>{
       console.log("wont save to database", err)
     })
 
-
-
-  chatProcessor.init(data.name, data.background, data.description, data.info, true).then(()=>{
+    // Sets up the chatProcessor for the squire
+    chatProcessor.init(data.name, data.background, data.description, data.info, true).then(()=>{
     res.send("set up complete")})
 })
 
+//GET THE RESPONSE FROM THE CHAT PROCESSOR
 app.post('/data', (req, res)=>{
   let message = req.body.message
   chatProcessor.getInput(message).then((message)=>{res.json({message:message, name:chatProcessor.name})})
 })
 
+//LISTEN ON THE PORT
 app.listen(port, () =>{
   console.log(`Server is running on port localhost:${port}`)
 })
-
-
-

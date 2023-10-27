@@ -1,3 +1,4 @@
+//SELECT EACH OF THE SQUIRES AND SHOW THEM ON 
 $(document).ready(function () {
   // Make a GET request to retrieve all squires
   $.get('/get-all-squires', function (squires) {
@@ -24,9 +25,7 @@ $(document).ready(function () {
               console.log(err);
             }
           });
-          
         });
-
       // Append the button to the container
       squireButtons.append(button);
     });
@@ -35,6 +34,7 @@ $(document).ready(function () {
   });
 });
 
+//HEAD BACK TO THE MAIN PAGE
 $("#back").on("click", ()=>{
   window.location.href = "/index/index.html";
 });
