@@ -1,0 +1,58 @@
+body {
+  font-family: 'Old English Text MT', serif;
+  background-color: #0d0700;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(background.jpg);
+  background-size: cover; /* Stretch the background image to cover the entire element */
+  background-repeat: no-repeat; /* Prevent repetition if the image is smaller than the element */
+  background-position: center;
+}
+
+.container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 5em;
+  color: #8b4513;
+  margin: 0;
+}
+
+.button-container {
+  margin-top: 20px;
+}
+
+button {
+  font-family: 'Old English Text MT', serif;
+  font-size: 1.5em;
+  padding: 10px 20px;
+  margin: 10px;
+  border: none;
+  cursor: pointer;
+  background-color: #8b4513;
+  color: #fff;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+  width: 15vw;
+}
+
+button:hover {
+  background-color: #5b2911;
+}
+
+.hire-button {
+  background-color: #8b4513;
+}
+
+.select-button {
+  background-color: #8b4513;
+}
+
+.select-button:hover {
+  background-color: #5b2911;
+}

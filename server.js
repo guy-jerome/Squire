@@ -1,11 +1,9 @@
 import {config} from "dotenv"
 config()
 import { fileURLToPath } from 'url';
-import {OpenAI} from "langchain/llms/openai"
 import express from "express"
 import path from "path"
 import ChatProcessor from "./chatbot.js"
-
 import mongoose from 'mongoose'
 import squireSchema from './squireSchema.js'
 
@@ -30,13 +28,46 @@ app.use(express.json());
 const chatProcessor = new ChatProcessor(process.env.OPENAI_API_KEY)
 
 app.get('/', (req, res) =>{
-  const filePath = path.join(__dirname, 'public','index.html')
+  const filePath = path.join(__dirname, 'public','index','index.html')
   res.sendFile(filePath)
 })
 
+
+
+app.post('/load', (req, res) => {
+  const squireName = req.body.squireName;
+ // Assuming you pass the Squire's name in the request body
+  // Use Mongoose to find the Squire by its name
+  Squire.findOne({ name: squireName })
+    .then((squire) => {
+      if (!squire) {
+        res.status(404).send('Squire not found');
+      } else {
+        chatProcessor.init(squire.name, squire.background, squire.description, squire.info, false).then(()=>{
+          res.send("set up complete")}) // Send the retrieved Squire as a JSON response
+      }
+    })
+    .catch((err) => {
+      console.error('Error loading Squire from the database:', err);
+      res.status(500).send('Error loading Squire from the database');
+    });
+});
+
+app.get('/get-all-squires', (req, res) => {
+  // Use Mongoose to find all squires in the database
+  Squire.find({})
+    .then((squires) => {
+      res.json(squires); // Send the retrieved squires as a JSON response
+    })
+    .catch((err) => {
+      console.error('Error retrieving squires from the database:', err);
+      res.status(500).send('Error retrieving squires from the database');
+    });
+});
+
+
 app.post('/create', (req, res) =>{
   let data = req.body
-
 
     // Create a new instance of the Character model with the data
     const squire = new Squire({
@@ -57,13 +88,13 @@ app.post('/create', (req, res) =>{
 
 
 
-  chatProcessor.init(data.name, data.background, data.description, data.info).then(()=>{
+  chatProcessor.init(data.name, data.background, data.description, data.info, true).then(()=>{
     res.send("set up complete")})
 })
 
 app.post('/data', (req, res)=>{
   let message = req.body.message
-  chatProcessor.getInput(message).then((message)=>{res.send(message)})
+  chatProcessor.getInput(message).then((message)=>{res.json({message:message, name:chatProcessor.name})})
 })
 
 app.listen(port, () =>{

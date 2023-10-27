@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Old English Text MT', serif;
+  font-weight: bold;
+  font-size: large;
+  background-color: #b3a785; /* A medieval-themed background color */
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-image: url(bountyboard.png);
+  background-size: cover;
+}
+
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #1a1509; /* Dark brown for a medieval feel */
+  margin: 5%;
+  padding: 3%;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #b38e53; /* Light brown for parchment-like background */
+  margin: 5%;
+  padding: 3%;
+  border: 0.2em solid #000; /* Dark border */
+  border-radius: 1em;
+  box-shadow: 0 0 1em #000; /* Slight shadow */
+  background: url(grunge-paper-background.jpg);
+  background-size: cover;
+}
+#name-label{
+  margin-top: 15%;
+}
+
+.button {
+  margin: 2%;
+  border: 0.3em solid #000;
+  padding: 0.5em 1em;
+  background-color: #1a1509;;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  font-family: 'Old English Text MT', serif;
+  font-size: large;
+  width: 15em;
+}
+
+#info {
+  width: 40vw;
+  height: 40vh;
+  background-color: #fff; /* White background for parchment */
+  border: 0.1em solid #000;
+  padding: 0.5em;
+}
+#background{
+  width: 30vw;
+  height: 10vh;
+  border: 0.1em solid #000;
+}
+#description{
+  width: 30vw;
+  height: 10vh;
+  border: 0.1em solid #000;
+}
+
+#warning {
+  color: #ff0000; /* Red for warning text */
+}

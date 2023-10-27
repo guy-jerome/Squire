@@ -1,0 +1,46 @@
+/* Apply medieval styling to the tavern */
+body{
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-image: url(tavern.jpg);
+  background-size: cover;
+}
+
+.tavern {
+  text-align: center;
+  font-family: 'Old English Text MT', serif;
+  background-color: #251b15;
+  color: #ffcc00;
+  padding: 20px;
+  width: 50vw;
+}
+
+h1 {
+  font-size: 36px;
+  margin: 0;
+  padding-bottom: 20px;
+}
+hr {
+  height: 4px; 
+  background-color: black;
+  border: none; 
+}
+/* Medieval-style button */
+.squire-button {
+  background-color: #8b0000;
+  color: #ffcc00;
+  font-family: 'Old English Text MT', serif;
+  font-size: 18px;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.squire-button:hover {
+  background-color: #a40000;
+}
