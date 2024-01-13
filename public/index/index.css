@@ -8,23 +8,33 @@ body {
   align-items: center;
   height: 100vh;
   background-image: url(background.jpg);
-  background-size: cover; /* Stretch the background image to cover the entire element */
+  background-size: 100% 100%; /* Stretch the background image to cover the entire element */
   background-repeat: no-repeat; /* Prevent repetition if the image is smaller than the element */
   background-position: center;
 }
 
 .container {
   text-align: center;
+  background-color: #633a27;
+  padding: 6%;
+  border-radius:5em;
+  box-shadow: 0 0 1em #000; /* Slight shadow */
 }
 
 h1 {
-  font-size: 5em;
-  color: #8b4513;
-  margin: 0;
+  font-size: 8em;
+  color: #fbf9f7;
+  margin: 1em;
+  
+  
 }
 
 .button-container {
   margin-top: 20px;
+  display: flex;
+  background-color: burlywood;
+  border-radius:2em;
+  box-shadow: 0 0 1em #000; /* Slight shadow */
 }
 
 button {
@@ -38,21 +48,12 @@ button {
   color: #fff;
   border-radius: 5px;
   transition: background-color 0.3s;
-  width: 15vw;
+  width: 20vw;
+  height: 15vh;
+  box-shadow: 0 0 .5em #000; /* Slight shadow */
+  border-radius:1em;
 }
 
 button:hover {
-  background-color: #5b2911;
-}
-
-.hire-button {
-  background-color: #8b4513;
-}
-
-.select-button {
-  background-color: #8b4513;
-}
-
-.select-button:hover {
   background-color: #5b2911;
 }

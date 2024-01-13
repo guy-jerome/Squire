@@ -10,9 +10,10 @@ body{
 }
 
 .tavern {
+  margin-top: 5em;
   text-align: center;
   font-family: 'Old English Text MT', serif;
-  background-color: #251b15;
+  background-color: #4a392e;
   color: #ffcc00;
   padding: 20px;
   width: 50vw;
@@ -25,8 +26,17 @@ h1 {
 }
 hr {
   height: 4px; 
-  background-color: black;
+  background-color: rgb(30, 20, 17);
   border: none; 
+}
+#squire-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 5em;
+  margin-top: 3em;
+  height: 10em;
+  background-color: #1c120b;
 }
 /* Medieval-style button */
 .squire-button {
@@ -38,6 +48,8 @@ hr {
   padding: 10px 20px;
   margin: 5px;
   cursor: pointer;
+  width: 8em;
+  height: 4em;
   transition: background-color 0.3s;
 }
 
